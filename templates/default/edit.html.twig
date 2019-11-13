@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+   <!-- Navigation -->
+
+  {% include('navbar.html.twig') %}
+  
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-left">
+        <h3>Editar user ({{ item.id}} - {{ item.name }})</h3>
+        
+
+        <form action='/save/up/{{ item.id}}' method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name"  value="{{ item.name }}">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description"  class="form-control">{{ item.description }}</textarea>
+          </div>
+          <h3>Users</h3>
+      </div>
+      <div class="col-lg-1"></div>
+      <div class="col-lg-9 text-left">
+          {% set i = 0 %}<br>
+            {% set j = 0 %}
+          {% for user in item.users %}
+            <div class="form-group">
+              <label for="name_user">Name User {{ (i+1) }}</label>
+              <input type="text" class="form-control" name="name_user[{{ i }}]" value="{{ user.name }}">
+           </div>
+           <div class="form-group">
+              <label for="password">Password</label>
+              <input type="text" class="form-control"  name="password[{{ i }}]" value="{{ user.password }}">
+           </div>
+           <label for="role">Role</label>
+            
+            {% for key,val in item.users[i].role %}
+              <div class="form-group">
+                
+                <input type="text" class="form-control" name="role[{{ i }}][{{ j }}]" value="{{ val }}">
+              </div>
+              {% set j = j + 1 %}
+            {% endfor %}
+            {% set i = i + 1 %}
+           {% endfor %}
+        
+      </div>
+      <div class="col-lg-2"></div>
+      <div class="col-lg-12"><input type="submit" class="btn btn-primary" value=Submit></input></div>
+  </div>
+</div>
+
+<bR><br>
+{% endblock %}

@@ -1,0 +1,18 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+edit:
+  path: /edit/{id}
+  controller: App\Controller\DefaultController::edit
+
+add:
+  path: /add
+  controller: App\Controller\DefaultController::add
+
+save:
+  path: /save/{type}/{id}
+  controller: App\Controller\DefaultController::save
+
+delete:
+  path: /delete/{id}
+  controller: App\Controller\DefaultController::delete
