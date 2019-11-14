@@ -13,6 +13,9 @@ use \Symfony\Component\Yaml\Parser;
  */
 class DefaultController extends Controller
 {
+
+		const FILE_PATH = '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml';
+		
     /**
      * @Route("/", name="index")
      */
@@ -20,11 +23,11 @@ class DefaultController extends Controller
     {
 
     	$yaml = new Parser();
-		$values = $yaml->parse( file_get_contents( '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml' ) );
+		$values = $yaml->parse( file_get_contents( self::FILE_PATH ) );
 
-		/*echo "<pre>";
+/*		echo "<pre>";
 		print_r( $values);
-*/
+die;*/
         return $this->render('default/index.html.twig', compact('values'));
     }
 
@@ -67,31 +70,70 @@ class DefaultController extends Controller
     	$yaml = new Parser();
 			$values = $yaml->parse( file_get_contents( '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml' ) );
 
-
-    	echo "<pre>";
-    	print_r ( $values);
-    	print_r ( $type);
-    	print_r ( $id);
-    	print_r ( $request->request->all());
-    	$data = $request->request->all();
-    	print_r ( $data['name']);
-    	echo "</pre>";
-    	die;
-
-
     	if ( $type == 'add')
     	{
-    		
+
+    		$data = $request->request->all();
+
+
+    		$datos['name'] = $data['name'];
+    		$datos['description'] = $data['description'];
+    		$datos['users'][0]['name'] = $data['name_user'];
+    		$datos['users'][0]['password'] = $data['password'];
+    		$datos['users'][0]['role'][] = $data['role'];
+
+    		array_push( $values['organizations'], $datos);
+
+    		$__yaml = Yaml::dump($values);
+				file_put_contents('/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml', $__yaml);
+
     	}
     	else
     	{
-    		//$values = $this->deleteItem( $id);
-    		//array_push( $values, )
+    		$values = $this->deleteItem( $id);
+
+    		$data = $request->request->all();
+
+    		$datos['name'] = $data['name'];
+    		$datos['description'] = $data['description'];
+
+    		for ( $i = 0; $i < count($data['name_user']); $i++) 
+    		{
+    			$datos['users'][$i]['name'] = $data['name_user'][$i];
+    			$datos['users'][$i]['password'] = $data['password'][$i];
+
+    			foreach ( $data['role'][$i] as $value) 
+    			{
+    				$datos['users'][$i]['role'][] = $value;
+    			}
+    		}
+
+    		array_push( $values['organizations'], $datos);
+
+    		$__yaml = Yaml::dump($values);
+				file_put_contents('/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml', $__yaml);
     	}
 
-    	die;
-    	//return "0";
+    	
+    	
+    	return $this->render('default/index.html.twig', compact('values'));
+
     }
+
+    private function saveItem( $dataArray)
+    {
+    	$yaml = new Parser();
+			$values = $yaml->parse( file_get_contents( '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml' ) );
+
+    	unset ( $values['organizations'][$id]);
+
+    	$__yaml = Yaml::dump($values);
+
+			file_put_contents('/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml', $__yaml);
+
+			return ( $values);
+    }
+
 
     private function deleteItem( $id)
     {

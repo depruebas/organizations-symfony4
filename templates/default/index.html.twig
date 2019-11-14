@@ -21,23 +21,22 @@
 		  </thead>
 		  <tbody>
 
-		  	
-        	{% set i = 0 %}
-	        {% for value in values['organizations'] %}
+	        {% for key,value in values['organizations'] %}
 	        	
 	        	<tr>
 			      <td>{{ value.name }}</td>
 			      <td>{{ value.description }}</td>
 			      <td>
 			      	{% for user in value.users %}
-			      		{{ user.name}} - {{ user.role[0] }}  <br>
+			      		{{ user.name }} - {{ user.role[0] }}  <br>
  			      	{% endfor %}
 
 			      </td>
-			      <td><a href="/edit/{{ i }}"><img src="/img/edit.png" border=0></a></td>
-			      <td><a href="/delete/{{ i }}"><img src="/img/delete_2.png" border=0></a></td>
+			      <td><a href="/edit/{{ key  }}"><img src="/img/edit.png" border=0></a></td>
+			      <td><a href="/delete/{{ key }}"><img src="/img/delete_2.png" border=0></a></td>
 			    </tr>
-			   {% set i = i + 1 %}
+			    
+
 	        {% endfor %}
 
 		  </tbody>
