@@ -16,8 +16,6 @@ Installation:
 <li> git clone
 <li> compose install
   
-Url to try it
-http://organizations.depruebas.com/
 
 <br><br>
 
@@ -37,7 +35,6 @@ L'installation:
 <li> git clone
 <li> composer install
   
-Url pour l'essayer
-http://organizations.depruebas.com/
+
 
 <br><br>
