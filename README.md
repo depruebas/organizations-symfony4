@@ -1,35 +1,43 @@
 # organizations-symfony4
 Symfony4 app 
 
-INGLESH 
+<b>ENGLISH</b>
 
 Symfony service to interpret a YAML file containing a list of organizations
 
 <li> View as an HTML table, names and descriptions of organizations
-Edit for an organization, the name, the description, the list of users (in the YAML file) + form
-Delete an organization (from the YAML file)
-Add an organization (in the YAML file) + form
+<li> Edit for an organization, the name, the description, the list of users (in the YAML file) + form
+<li> Delete an organization (from the YAML file)
+<li> Add an organization (in the YAML file) + form
 
 Use bootstrap and symfony 4
 
 Installation:
 
-git clone
-compose install
+<li> git clone
+<li> compose install
+  
+Url to try it
+http://organizations.depruebas.com/
 
 
-FRENCH
+
+<b>FRENCH</b>
 
 Service Symfony pour interpréter un fichier YAML contenant une liste d'organisations
 
-Afficher sous forme de tableau HTML, les nom et descriptions des organisations
-Modifier pour une organisation, le nom, la description, la liste des utilisateurs (dans le fichier YAML) + formulaire
-Supprimer une organisation (du fichier YAML)
-Ajouter une organisation (dans le fichier YAML) + formulaire
+<li> Afficher sous forme de tableau HTML, les nom et descriptions des organisations
+<li> Modifier pour une organisation, le nom, la description, la liste des utilisateurs (dans le fichier YAML) + formulaire
+<li> Supprimer une organisation (du fichier YAML)
+<li> Ajouter une organisation (dans le fichier YAML) + formulaire
 
 Utilisez bootstrap et symfony 4
 
 L'installation:
 
-git clone
-composer install
+<li> git clone
+<li> composer install
+  
+Url pour l'essayer
+http://organizations.depruebas.com/
+
