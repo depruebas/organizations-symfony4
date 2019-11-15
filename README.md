@@ -1,5 +1,4 @@
 # organizations-symfony4
-Symfony4 app 
 
 <b>ENGLISH</b>
 
