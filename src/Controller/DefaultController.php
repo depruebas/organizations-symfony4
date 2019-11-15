@@ -14,8 +14,13 @@ use \Symfony\Component\Yaml\Parser;
 class DefaultController extends Controller
 {
 
-		const FILE_PATH = '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml';
-		
+		protected $file_path;
+
+		public function __construct()
+		{
+			$this->file_path = dirname( dirname( dirname( __FILE__))) . '/public/files/organizations.yaml';
+		}
+
     /**
      * @Route("/", name="index")
      */
@@ -23,7 +28,7 @@ class DefaultController extends Controller
     {
 
     	$yaml = new Parser();
-		$values = $yaml->parse( file_get_contents( self::FILE_PATH ) );
+		$values = $yaml->parse( file_get_contents( $this->file_path ) );
 
 /*		echo "<pre>";
 		print_r( $values);
@@ -35,7 +40,7 @@ die;*/
     {
 
     	$yaml = new Parser();
-			$values = $yaml->parse( file_get_contents( '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml' ) );
+			$values = $yaml->parse( file_get_contents( $this->file_path ) );
 
 			$item = $values['organizations'][$id];
 			$item['id'] = $id; 
@@ -68,7 +73,7 @@ die;*/
     {
 
     	$yaml = new Parser();
-			$values = $yaml->parse( file_get_contents( '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml' ) );
+			$values = $yaml->parse( file_get_contents( $this->file_path ) );
 
     	if ( $type == 'add')
     	{
@@ -85,7 +90,7 @@ die;*/
     		array_push( $values['organizations'], $datos);
 
     		$__yaml = Yaml::dump($values);
-				file_put_contents('/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml', $__yaml);
+				file_put_contents( $this->file_path, $__yaml);
 
     	}
     	else
@@ -111,7 +116,7 @@ die;*/
     		array_push( $values['organizations'], $datos);
 
     		$__yaml = Yaml::dump($values);
-				file_put_contents('/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml', $__yaml);
+				file_put_contents( $this->file_path, $__yaml);
     	}
 
     	
@@ -120,7 +125,7 @@ die;*/
 
     }
 
-    private function saveItem( $dataArray)
+/*    private function saveItem( $dataArray)
     {
     	$yaml = new Parser();
 			$values = $yaml->parse( file_get_contents( '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml' ) );
@@ -132,20 +137,20 @@ die;*/
 			file_put_contents('/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml', $__yaml);
 
 			return ( $values);
-    }
+    }*/
 
 
     private function deleteItem( $id)
     {
 
     	$yaml = new Parser();
-			$values = $yaml->parse( file_get_contents( '/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml' ) );
+			$values = $yaml->parse( file_get_contents( $this->file_path ) );
 
     	unset ( $values['organizations'][$id]);
 
     	$__yaml = Yaml::dump($values);
 
-			file_put_contents('/home/adyma/wwwroot/symfony/organizations/public/files/organizations.yaml', $__yaml);
+			file_put_contents( $this->file_path, $__yaml);
 
 			return ( $values);
     }
